@@ -6,8 +6,10 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("PRISMA_DATABASE_URL")
+  // provider = "postgresql"
+  // url      = env("PRISMA_DATABASE_URL")
+  provider = "sqlite"
+  url = "file:./dev.db"
 }
 
 model Authorization {
@@ -17,28 +19,28 @@ model Authorization {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
   name      String
 }
 
-model Role {
-  id        String         @id @default(uuid())
-  createdAt DateTime       @default(now())
-  updatedAt DateTime       @default(now()) @updatedAt
-  name      RoleName       @default(USER)
-  user      RolePermission
-}
+// model Role {
+//   id        String         @id @default(uuid())
+//   createdAt DateTime       @default(now())
+//   updatedAt DateTime       @default(now()) @updatedAt
+//   name      RoleName       @default(USER)
+//   user      RolePermission
+// }
 
-enum RoleName {
-  ADMIN
-  USER
-}
+// enum RoleName {
+//   ADMIN
+//   USER
+// }
 
-enum RolePermission {
-  READ
-  WRITE
-  READWRITE
-  NONE
-}
+// enum RolePermission {
+//   READ
+//   WRITE
+//   READWRITE
+//   NONE
+// }
